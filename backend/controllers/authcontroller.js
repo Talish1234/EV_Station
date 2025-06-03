@@ -35,8 +35,8 @@ const login = catchAsync(async (req, res) => {
   const token = jwt.sign({userID:user._id,role:user.role}, process.env.SECRET, { expiresIn: 1000*60*60*24*30 });
 
   return res.cookie('token',token,{
-        //secure: true,
-        //sameSite: 'None',
+        secure: true,
+        sameSite: 'None',
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 30
   }).status(200).json({ message: "Login successful",data:{name:user.name,email:user.email, role:user.role}});
